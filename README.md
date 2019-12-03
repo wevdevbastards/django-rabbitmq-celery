@@ -37,7 +37,7 @@ Celery will look for the requested task using the "auto_discover_tasks" method, 
 <br>
 The task will concatenate both string parameters by joining then using the 'es' string in the middle and returns the result.
 <br>
-The result will be sent to the queue againg as a "async_result" ready to be fetched by the producer which in this case is the web app.
+The result will be sent to the queue again as an "async_result" ready to be fetched by the producer which in this case is the web app.
 <br>
 To wait the result the web app uses a while loop and holds until the task result "ready" state is reached.
 <br>
