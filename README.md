@@ -21,3 +21,14 @@ To run the project and launch all containers type:<br><br>
 <p>Here is a diagram with overall process involving all the components.<p>
   <br>
 <img src="django_rabbitmq_celery.png">
+<br>
+  <h2>How does it work?<h2>
+  
+  <br>
+  <p>User opens the django web app by going to http://localhost:8000, you must fill both text input fields with random text. Hitting the submit button it will post the data to the views.py file and post action. After validating the form data, it will use the app.send_task() method and invoking the 'adding_taski' task by passing the string parameters.
+
+We store the result in a variable which will be used later to fetch the task result.
+
+At this point Celery received the message and routed it to a queue. In the other side the remote service app has been loaded by celery as a worker by executing this command in the docker-compose.yml file:
+
+celery -A rabbitmq_celery worker -l info
