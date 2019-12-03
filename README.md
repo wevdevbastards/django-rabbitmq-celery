@@ -16,3 +16,4 @@ rabbitmqctl set_user_tags user_you_want management<br>
 To run the project and launch all containers type:<br><br>
 
 <b>docker-compose up</b>
+<img src="project_diagram.png">
