@@ -29,6 +29,17 @@ To run the project and launch all containers type:<br><br>
 
 We store the result in a variable which will be used later to fetch the task result.
 
-At this point Celery received the message and routed it to a queue. In the other side the remote service app has been loaded by celery as a worker by executing this command in the docker-compose.yml file:
-
+At this point Celery received the message and routed it to a queue. In the other side the remote service app has been loaded by celery as a worker by executing this command in the docker-compose.yml file, worker container:
+<br>
 celery -A rabbitmq_celery worker -l info
+<br>
+Celery will look for the requested task using the "auto_discover_tasks" method, and ti will execute it passing it the parameters entered in the web app UI form. 
+<br>
+The task will concatenate both string parameters by joining then using the 'es' string in the middle and returns the result.
+<br>
+The result will be sent to the queue againg as a "async_result" ready to be fetched by the producer which in this case is the web app.
+<br>
+To wait the result the web app uses a while loop and holds until the task result "ready" state is reached.
+<br>
+Once the result is retrieved it will open a file and writes to it.
+
