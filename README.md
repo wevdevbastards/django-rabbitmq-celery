@@ -33,7 +33,7 @@ At this point Celery received the message and routed it to a queue. In the other
 <br>
 celery -A rabbitmq_celery worker -l info
 <br>
-Celery will look for the requested task using the "auto_discover_tasks" method, and ti will execute it passing it the parameters entered in the web app UI form. 
+Celery will look for the requested task using the "auto_discover_tasks" method, and it will execute it passing it the parameters entered in the web app UI form. 
 <br>
 The task will concatenate both string parameters by joining then using the 'es' string in the middle and returns the result.
 <br>
