@@ -2,9 +2,9 @@
 Code example to communicate two different Django Projects through RabbitMq as Broker and Celery as Task Runner
 
 Default User for rabbitmq server is django and also the password.
-The Rabbitmq vhost is rabbit
-By default user django has the "management" role.
-
+The Rabbitmq vhost is rabbit.<br>
+By default the user django has the "management" role.
+<br><br>
 If you want change this, you need to enter to the rabbitmq-server container to bash command line and write:
 
 rabbitmqctl add_user user_you_want user_password<br>
