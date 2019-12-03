@@ -22,7 +22,7 @@ To run the project and launch all containers type:<br><br>
   <br>
 <img src="django_rabbitmq_celery.png">
 <br>
-  <h2>How does it work?<h2>
+  <h2>How does it work?</h2>
   
   <br>
   <p>User opens the django web app by going to http://localhost:8000, you must fill both text input fields with random text. Hitting the submit button it will post the data to the views.py file and post action. After validating the form data, it will use the app.send_task() method and invoking the 'adding_taski' task by passing the string parameters.
