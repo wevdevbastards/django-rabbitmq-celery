@@ -18,6 +18,6 @@ To run the project and launch all containers type:<br><br>
 <b>docker-compose up</b>
 <br>
 
-<b>Here is a diagram with overall process involving all the components.<b>
+<p>Here is a diagram with overall process involving all the components.<p>
   <br>
 <img src="project_diagram.png">
