@@ -1,0 +1,69 @@
+version: '3'
+
+services:
+  
+  web_app:
+    build:
+      context: .
+      dockerfile: Dockerfile_backend
+    command: bash -c "pwd && ls && cd rabbitmq_celery && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    stdin_open: true
+    tty: true
+    container_name: web_app_1
+    ports:
+      - "8000:8000"
+    networks:
+      - default
+    depends_on:
+      - rabbitmq-server
+    links:
+      - rabbitmq-server
+  web_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "pwd && ls && cd rabbitmq_celery && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
+    stdin_open: true
+    tty: true
+    container_name: web_service_1
+    ports:
+      - "8001:8001"
+    networks:
+      - default
+    depends_on:
+      - rabbitmq-server
+    links:
+      - rabbitmq-server
+  rabbitmq-server:
+    image: 'rabbitmq:latest'
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    ports:
+      - "5672:5672"
+    networks:
+      - default
+  worker:
+    build: .      
+    command: bash -c "pwd && ls && cd rabbitmq_celery && celery -A rabbitmq_celery worker -l info"
+    container_name: worker
+    depends_on:
+      - rabbitmq-server
+      - web_service
+    networks:
+      - default
+  flower_monitor:  
+    image: mher/flower
+    command: ["flower", "--broker=amqp://django:django@rabbitmq-server:5672/rabbit", "--port=8888"]  
+    ports:  
+     - 8888:8888 
+    networks:
+      - default
+    container_name: flower_monitor_1
+    depends_on:
+      - rabbitmq-server 
+      - worker
+      - web_app
+      - web_service
+networks:
+  default:
+    
