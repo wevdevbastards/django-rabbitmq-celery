@@ -20,4 +20,4 @@ To run the project and launch all containers type:<br><br>
 
 <p>Here is a diagram with overall process involving all the components.<p>
   <br>
-<img src="project_diagram.png">
+<img src="django_rabbitmq_celery.png">
